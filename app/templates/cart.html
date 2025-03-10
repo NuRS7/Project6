@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Корзина</title>
+    <style>
+        /* Общие стили */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        li form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        li form button {
+            padding: 8px 12px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        li form button:hover {
+            background-color: #45a049;
+        }
+
+        .total-price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #777;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Корзина</h1>
+
+        {% if cart %}
+            <ul>
+                {% for flower in cart %}
+                    <li>
+                        <div>
+                            <h3>{{ flower.name }} - {{ flower.price }}Тенге ({{ flower.quantity }} шт.)</h3>
+                            <strong>Сумма: {{ flower.total_price }}Тенге</strong>
+                        </div>
+                        <form action="/cart/update" method="post">
+                            <input type="hidden" name="flower_id" value="{{ flower.id }}">
+                            <button type="submit" name="action" value="increase">+</button>
+                            <button type="submit" name="action" value="decrease">-</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+            <h2 class="total-price">Общая сумма: {{ total_price }}Тенге</h2>
+        {% else %}
+            <p>Корзина пуста.</p>
+        {% endif %}
+
+        <a href="/flowers">Назад к выбору цветов</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Регистрация</title>
+    <style>
+        /* Общие стили */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        input[type="email"],
+        input[type="text"],
+        input[type="password"],
+        input[type="file"],
+        button {
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        input[type="file"] {
+            padding: 6px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            color: red;
+            font-size: 14px;
+        }
+
+        /* Стили для фото */
+        .photo-upload {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-upload input[type="file"] {
+            background-color: #f4f7fa;
+            padding: 8px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Регистрация</h1>
+        <form action="/signup" method="post" enctype="multipart/form-data">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="full_name" placeholder="Имя Фамилия" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+
+            <!-- Фото -->
+            <div class="photo-upload">
+                <input type="file" name="photo" accept="image/*">
+            </div>
+
+            <button type="submit">Зарегистрироваться</button>
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+        </form>
+    </div>
+
+</body>
+</html>
